@@ -20,10 +20,8 @@ npm run lint — run ESLint
 Install packages
 ```
 npm install tailwindcss @tailwindcss/vite 
-```
-```
 npm install @dicebear/core @dicebear/collection`
-``
+```
 
 
 Env
