@@ -3,10 +3,9 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  sendPasswordResetEmail, 
+  sendPasswordResetEmail,
 } from 'firebase/auth'
-
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { auth } from './firebase'
 import Navbar from './components/Navbar.jsx'
 import { useExpenses } from './hooks/useExpenses.js'
@@ -15,8 +14,7 @@ import Expenses from './pages/Expenses.jsx'
 import FiltersPage from './pages/Filters.jsx'
 import ResetPassword from './pages/ResetPassword.jsx'
 
-
-// Simple auth screen
+// ---------- AuthScreen (keep as you wrote it) ----------
 function AuthScreen() {
   const [isRegister, setIsRegister] = useState(false)
   const [email, setEmail] = useState('')
@@ -60,7 +58,6 @@ function AuthScreen() {
       setInfo('Password reset email sent. Please check your inbox.')
     } catch (err) {
       console.error(err)
-      // optional: you can map error codes to friendlier messages
       setError(err.message || 'Failed to send password reset email.')
     } finally {
       setResetLoading(false)
@@ -100,7 +97,7 @@ function AuthScreen() {
               className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              required={!isRegister ? true : true}
+              required
             />
             {!isRegister && (
               <button
@@ -111,7 +108,6 @@ function AuthScreen() {
               >
                 {resetLoading ? 'Sending reset email...' : 'Forgot password?'}
               </button>
-
             )}
           </div>
 
@@ -136,7 +132,7 @@ function AuthScreen() {
         </form>
 
         <div className="mt-4 text-center text-xs text-slate-500">
-          {isRegister ? 'Already have an account?' : "Don’t have an account?"}{' '}
+          {isRegister ? 'Already have an account?' : 'Don’t have an account?'}{' '}
           <button
             type="button"
             onClick={() => {
@@ -154,6 +150,7 @@ function AuthScreen() {
   )
 }
 
+// ---------- MAIN APP ----------
 export default function App() {
   const [user, setUser] = useState(null)
   const [initialLoading, setInitialLoading] = useState(true)
@@ -178,34 +175,82 @@ export default function App() {
     )
   }
 
-  if (!user) {
-    return <AuthScreen />
-  }
-
   return (
     <div className="flex min-h-screen flex-col bg-slate-100">
-      <Navbar user={user} />
-      <main className="flex-1">
-        {expensesLoading ? (
-          <div className="flex items-center justify-center py-8">
-            <div className="rounded-2xl bg-white px-6 py-3 text-sm text-slate-600 shadow">
-              Loading expenses...
-            </div>
-          </div>
-        ) : (
-          <Routes>
-            <Route path="/" element={<Dashboard expenses={expenses} />} />
-            <Route
-              path="/expenses"
-              element={<Expenses user={user} expenses={expenses} />}
-            />
-            <Route
-              path="/filters"
-              element={<FiltersPage expenses={expenses} />}
-            />
-          </Routes>
-        )}
-      </main>
+      <Routes>
+        {/* 🔓 PUBLIC ROUTE: reset password (can be used without login) */}
+        <Route path="/reset-password" element={<ResetPassword />} />
+
+        {/* 🔒 PROTECTED ROUTES: need login, but we still show Navbar etc. */}
+        <Route
+          path="/"
+          element={
+            user ? (
+              <>
+                <Navbar user={user} />
+                {expensesLoading ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="rounded-2xl bg-white px-6 py-3 text-sm text-slate-600 shadow">
+                      Loading expenses...
+                    </div>
+                  </div>
+                ) : (
+                  <Dashboard expenses={expenses} />
+                )}
+              </>
+            ) : (
+              <AuthScreen />
+            )
+          }
+        />
+
+        <Route
+          path="/expenses"
+          element={
+            user ? (
+              <>
+                <Navbar user={user} />
+                {expensesLoading ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="rounded-2xl bg-white px-6 py-3 text-sm text-slate-600 shadow">
+                      Loading expenses...
+                    </div>
+                  </div>
+                ) : (
+                  <Expenses user={user} expenses={expenses} />
+                )}
+              </>
+            ) : (
+              <AuthScreen />
+            )
+          }
+        />
+
+        <Route
+          path="/filters"
+          element={
+            user ? (
+              <>
+                <Navbar user={user} />
+                {expensesLoading ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="rounded-2xl bg-white px-6 py-3 text-sm text-slate-600 shadow">
+                      Loading expenses...
+                    </div>
+                  </div>
+                ) : (
+                  <FiltersPage expenses={expenses} />
+                )}
+              </>
+            ) : (
+              <AuthScreen />
+            )
+          }
+        />
+
+        {/* Catch-all: if unknown route, send to home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
   )
 }
