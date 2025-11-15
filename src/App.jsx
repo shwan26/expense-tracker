@@ -13,6 +13,7 @@ import { useExpenses } from './hooks/useExpenses.js'
 import Dashboard from './pages/Dashboard.jsx'
 import Expenses from './pages/Expenses.jsx'
 import FiltersPage from './pages/Filters.jsx'
+import ResetPassword from './pages/ResetPassword.jsx'
 
 
 // Simple auth screen
