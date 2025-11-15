@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+/* Simple reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(248, 250, 252); /* slate-100 */
+  color: rgb(15, 23, 42);               /* slate-900 */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Allow full screen layout */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
