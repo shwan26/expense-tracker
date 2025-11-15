@@ -15,3 +15,22 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+
+
+.animate-avatar {
+  animation: popIn 0.4s ease;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

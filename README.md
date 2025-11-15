@@ -10,13 +10,21 @@ Quick start
 Open the URL printed by Vite (usually http://localhost:5173).
 
 Useful scripts
-- npm run dev — start dev server
-- npm run build — production build
-- npm run preview — serve built app
-- npm run lint — run ESLint
+```
+npm run dev — start dev server
+npm run build — production build
+npm run preview — serve built app
+npm run lint — run ESLint
+```
 
 Install packages
-- npm install tailwindcss @tailwindcss/vite 
+```
+npm install tailwindcss @tailwindcss/vite 
+```
+```
+npm install @dicebear/core @dicebear/collection`
+``
+
 
 Env
 Create a .env.local and add VITE_ prefixed vars for Firebase (e.g. VITE_FIREBASE_API_KEY). The repo ignores .env and .env.local.

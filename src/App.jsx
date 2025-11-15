@@ -13,6 +13,8 @@ import Dashboard from './pages/Dashboard.jsx'
 import Expenses from './pages/Expenses.jsx'
 import FiltersPage from './pages/Filters.jsx'
 import ResetPassword from './pages/ResetPassword.jsx'
+import SettingsPage from './pages/SettingsPage.jsx'
+
 
 // ---------- AuthScreen (keep as you wrote it) ----------
 function AuthScreen() {
@@ -247,6 +249,17 @@ export default function App() {
             )
           }
         />
+
+        <Route
+          path="/settings"
+          element={
+            <>
+              <Navbar user={user} />
+              <SettingsPage user={user} />
+            </>
+          }
+        />
+
 
         {/* Catch-all: if unknown route, send to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
