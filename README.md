@@ -39,5 +39,9 @@ VITE_FIREBASE_APP_ID=your_app_id
 Stack
 Vite · React · Tailwind CSS v4 · Chart.js · Firebase · Headless UI
 
+
+Credits / Attribution
+This project includes material licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+
 License
-No license specified — add a LICENSE file to make reuse explicit.
+CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/  

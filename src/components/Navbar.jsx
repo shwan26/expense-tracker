@@ -25,13 +25,10 @@ export default function Navbar({ user }) {
 
   return (
     <>
-      {/* ------------------------------------------------------ */}
-      {/*  TOP BAR */}
-      {/* ------------------------------------------------------ */}
+
       <header className="border-b bg-white/85 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
 
-          {/* ---------------- LOGO (DESKTOP & MOBILE) ---------------- */}
           <div
             className="flex cursor-pointer items-center gap-2"
             onClick={() => navigate("/")}
@@ -48,7 +45,7 @@ export default function Navbar({ user }) {
             </div>
           </div>
 
-          {/* ---------------- NAV LINKS (DESKTOP) ---------------- */}
+  
           <nav className="hidden items-center gap-2 sm:flex">
             {navItems.map((item) => (
               <NavLink
@@ -81,7 +78,7 @@ export default function Navbar({ user }) {
             </button>
           </div>
 
-          {/* ---------------- HAMBURGER (MOBILE) ---------------- */}
+  
           <button
             className="inline-flex items-center justify-center rounded-full bg-slate-100 p-2 text-slate-700 hover:bg-slate-200 sm:hidden"
             onClick={() => setMobileOpen(true)}
@@ -101,8 +98,7 @@ export default function Navbar({ user }) {
       {/* ------------------------------------------------------ */}
       <Transition show={mobileOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50 sm:hidden" onClose={setMobileOpen}>
-          
-          {/* Background Overlay */}
+
           <Transition.Child
             as={Fragment}
             enter="duration-200 ease-out"
