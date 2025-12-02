@@ -2,6 +2,25 @@
 
 A minimal React + Vite expense tracking starter using Tailwind CSS, Chart.js and Firebase.
 
+## App Screenshots
+![Login](public/loginpage.png)
+![Dashboard](public/dashboard.png)
+![Add Expense](public/expenses.png)
+![Filter Expense](public/filters.png)
+
+
+## Features
+
+- Add, view, and delete expenses
+- Categorize transactions
+- Visual summary of spending
+
+## Usage
+
+1. Clone the repository
+2. Install dependencies
+3. Run the app
+
 Quick start
 1. git clone https://github.com/shwan26/expense-tracker.git
 2. cd expense-tracker
